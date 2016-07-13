@@ -12,24 +12,11 @@
 	<!-- <script type="text/javascript" src="js/lib/browser.min.js"></script> -->
 	<script type="text/jsx">
 		
-
 		var hello = <h1 height="100" data-test="test" test="test">Hello ReactJS</h1>
 		ReactDOM.render(
 			hello,
 			document.getElementById('example')
 		)
-		function testClick(){
-			alert("testClick")
-		}
-		var app = <button onClick={testClick.bind(this)} style={{
-		backgroundColor:"#ff0000",
-		width:"200px",
-		height:"100px"
-		}}>Hello ReactJS</button>
-		ReactDOM.render(
-			app,
-			document.getElementById("example")
-		);
 	</script>
 </body>
 </html>
