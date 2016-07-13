@@ -11,6 +11,8 @@
 	<script type="text/javascript" src="js/lib/react-dom.js"></script>
 	<!-- <script type="text/javascript" src="js/lib/browser.min.js"></script> -->
 	<script type="text/jsx">
+		//props是一个对象，是组件用来接外面传来的参数，组件内部不允许修改自己的props属性
+		//组件之间的通信
 		var Parent = React.createClass({
 			click : function () {
 				this.refs.child.getDOMNode().style.color = "red";
