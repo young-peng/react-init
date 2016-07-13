@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>react demo1</title>
+</head>
+<body>
+	<div id="example"></div>
+	<script type="text/javascript" src="js/lib/react.js"></script>
+	<script type="text/javascript" src="js/lib/JSXTransformer.js"></script>
+	<script type="text/javascript" src="js/lib/react-dom.js"></script>
+	<script type="text/jsx">
+		
+		var msg = "Hello ReactJS!!";
+		React.createElement("h1",null,msg)//React 解析器转化
+		ReactDOM.render(
+			<h1>{msg}</h1>,
+			document.getElementById('example')
+		);
+	</script>
+</body>
+</html>
