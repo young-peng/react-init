@@ -11,28 +11,61 @@
 	<script type="text/javascript" src="js/lib/react-dom.js"></script>
 	<!-- <script type="text/javascript" src="js/lib/browser.min.js"></script> -->
 	<script type="text/jsx">
-		//props是一个对象，是组件用来接外面传来的参数，组件内部不允许修改自己的props属性
-		//组件之间的通信子组件调用父组件的方法：只需父组件把要被调用的方法以属性的方式放在了子组件上，
-		//子组件内部便可以通过this.props.方法获得父组件传过来的方法
-		//父组件调用子组件的方法：子组件被设置为ref之后，父组件便可以通过this.ref.xxx来获取子组件的
-		var Parent = React.createClass({
-			click : function () {
-				this.refs.child.getDOMNode().style.color = "red";
+		var List = React.createClass({
+			//1.创建阶段
+			getDefaultProps : function () {
+				console.log("getDefaultProps");
+				return {};
 			},
-			render : function () {
-				return (
-					<div onClick={this.click}>
-						Parent is : <Child name={this.props.name} ref="child"></Child>
-					</div>
-				)
+			//2.实例化阶段
+			getInitialState : function () {
+				console.log("getInitialState");
+				return {};
+			},
+			componentWillMount : function (){
+				//render之前调用此方法
+				console.log("componentWillMount");
+			},
+			render: function () {
+				//渲染并返回一个虚拟DOM
+				console.log("render");
+				return (<div>
+					hello <strong>{this.props.name}</strong>
+				</div>) 
+			},
+			//3.更新阶段
+			componentDidMount : function () {
+				//在初始化渲染执行之后立刻调用一次，仅客户端有效（服务器端不会调用）。
+				//在生命周期中的这个时间点，组件拥有一个 DOM 展现，你可以通过 this.getDOMNode() 来获取相应 DOM 节点。
+				console.log("componentDidMount");
+			},
+			componentWillReceiveProps : function () {
+				//在this.props被修改或父组件调用setProps()方法之后
+				console.log("componentWillRecieveProps");
+			},
+			shouldComponentUpdate : function () {
+				//是否需要更新
+				console.log("shouldComponentUpdate");
+				return true;
+			},
+			componentWillUpdate : function () {
+				//将要更新
+				console.log("componentWillUpdate");
+			},
+			componentDidUpdate : function () {
+				//更新完毕
+				console.log("componentDidUpdate");
+			},
+			//销毁阶段
+			componentWillUnmount : function () {
+				console.log("componentWillUnmount")
 			}
+
 		});
-		var Child = React.createClass({
-			render : function () {
-			return <span>{this.props.name}</span>
-			}
-		});
-		ReactDOM.render(<Parent name="React"/>,document.getElementById("example"));
+		ReactDOM.render(
+			<List name="ReactJS"/>,
+			document.getElementById("example")
+		)
 	</script>
 </body>
 </html>
