@@ -1,0 +1,64 @@
+.height50{
+	height: 50px;
+}
+.height400{
+	height: 400px;
+}
+.width400{
+	width: 400px;
+}
+.bgred{
+	background-color: #6AC5AC;
+}
+.box{
+	display: flex;
+	flex-direction: column;
+	flex:1;
+	position: relative;
+	color:#FDC72F;
+	line-height: 1em;
+}
+.label{
+	top:0;
+	left:0;
+	padding: 0 3px 3px 0;
+	position: absolute;
+	background-color:#FDC72F;
+	color:white;
+	line-height: 1em;
+}
+.top{
+	width: 100%;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+}
+.bottom{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.right{
+	width: 50px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.left{
+	width: 50px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.margginBox{
+	position: absolute;
+	top:100px;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+.borderBox{
+	flex:1;
+	display: flex;
+	justify-content: space-between;
+}

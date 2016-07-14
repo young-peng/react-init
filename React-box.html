@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React-box</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet/style.css">
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/javascript" src="js/lib/react.js"></script>
+	<script type="text/javascript" src="js/lib/JSXTransformer.js"></script>
+	<script type="text/javascript" src="js/lib/react-dom.js"></script>
+	<script type="text/jsx">
+		var Box = React.createClass({
+			render : function () {
+				var parentClass = "box"+this.props.width+" "+this.props.height;
+				var topClass = "top height50 "+this.props.classBg;
+				var leftClass = "left " +this.props.classBg;
+				var rightClass = "right " +this.props.classBg;
+				var bottomClass = "bottom height50 " +this.props.classBg;
+				return (
+					<span className={parentClass}>
+						<span className="label">{this.props.boxName}</span>
+						<span className={topClass}>top</span>
+						<span className={this.props.childName}>
+							<span className={leftClass}>left</span>
+							{this.props.children}
+							<span className={rightClass}>right</span>
+						</span>
+						<span className={bottomClass}>bottom</span>
+					</span>
+				)
+			}
+		});
+
+		var MargginBox = React.createClass({
+			render : function () {
+				return (
+					<span className="margginBox">
+						<Box childName="borderBox" height="height400" width="width400" boxName="margin" classBg="bgred">{this.props.children}</Box>
+					</span>
+				)
+			}
+		});
+
+		var BoxContainer = React.createClass({
+			render : function () {
+				return (
+					<MargginBox></MargginBox>
+				)
+			}
+		});
+		ReactDOM.render(<BoxContainer/>,document.getElementById("container"))
+	</script>
+</body>
+</html>
