@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>react demo</title>
+</head>
+<body>
+	<div id="example"></div>
+	<script type="text/javascript" src="js/lib/react.js"></script>
+	<script type="text/javascript" src="js/lib/JSXTransformer.js"></script>
+	<script type="text/javascript" src="js/lib/react-dom.js"></script>
+	<script type="text/jsx">
+		var Input = React.createClass({
+			getInitialState : function () {
+				return {value : "hello"}
+			},
+			handleChange : function (event) {
+				this.setState({value : event.target.value})
+			},
+			render : function () {
+				var value = this.state.value;
+				return (
+					<div>
+					<input type="text" value={value} onChange={this.handleChange}/>
+					<p>{value}</p>
+					</div>
+				)
+			}
+		})
+		ReactDOM.render(<Input/>,document.getElementById("example"))
+	</script>
+</body>
+</html>
