@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React-MutationObserver</title>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/javascript" src="js/lib/react.js"></script>
+	<script type="text/javascript" src="js/lib/JSXTransformer.js"></script>
+	<script type="text/javascript" src="js/lib/react-dom.js"></script>
+	<script type="text/javascript">
+		var MutationObserver = window.MutationObserver||window.WebkitMutationObserver||window.MozMutationObserver;
+		var observeMutationSupport = !! MutationObserver;
+		var changeNodes = [];
+		if(observeMutationSupport){
+			var observer = new MutationObserver(function (mutations) {
+				changeNodes = mutations;
+				mutations.forEach(function (mutation){
+					console.log(mutation);
+				})
+			});
+			var options = {
+				"childList" : true,//子节点的变动
+				"attributes" : true,//属性的变动
+				"characterData" : true,//节点内容或节点文本变动
+				"subtree":true,//所有后代节点的变动
+				"attributeOldValue":true,//观察attributes变动是，是否需要记录变动前的属性值
+				"characterDataOldValue":true//观察characterData变动时，是否需要记录变动前的值 
+			}
+			observer.observe(document.body,options);
+		}
+	</script>
+	<script type="text/jsx">
+		function LifeCycle(name){
+			var obj = {
+				name : name
+			}
+			for (var n in Cycle) {
+				obj[n] = Cycle[n]
+			}
+			return obj;
+		}
+		var Cycle = {
+			getInitialState : function () {
+				console.log(this.name,"getInitialState");
+				return {};
+			},
+			getDefaultProps : function () {
+				console.log(this.name,"getDefaultProps");
+				return {};
+			},
+			componentWillMount : function (){
+				console.log(this.name,"componentWillMount");
+			},
+			componentDidMount : function () {
+				console.log(this.name,"componentDidMount");
+			},
+			componentWillReceiveProps : function () {
+				console.log(this.name,"componentWillReceiveProps");
+			},
+			shouldComponentUpdate : function () {
+				console.log(this.name,"shouldComponentUpdate");
+				return true
+			},
+			componentWillUpdate : function () {
+				console.log(this.name,"componentWillUpdate");
+			},
+			componentDidUpdate : function () {
+				console.log(this.name,"componentDidUpdate");
+			},
+			componentWillUnmount : function () {
+				console.log(this.name,"componentWillUnmount");
+			}
+		}
+		var Ctrip = React.createClass ({
+			mixinx : [LifeCycle('Ctrip')],
+			render : function () {
+				console.log("Ctrip","render");
+				return (
+					<ul>
+						<li>ctrip</li>
+						<li>
+							<ul>
+								{this.props.children}
+							</ul>
+						</li>
+					</ul>
+				)
+			}
+		});
+		var Elong = React.createClass({
+			mixins : [LifeCycle("Elong")],
+			render : function () {
+				console.log("Elong","render");
+				return (
+				<li>elong</li>
+				)
+			}
+		});
+
+		var Qunar = React.createClass({
+			mixins : [LifeCycle("Qunar")],
+			render : function () {
+				console.log("Qunar","render");
+				return (
+				<li>qunar</li>
+				)
+			}
+		});
+
+		var Ly = React.createClass({
+			mixins : [LifeCycle("Ly")],
+			render : function () {
+				console.log("Ly","render");
+				return (
+				<li>Ly</li>
+				)
+			}
+		});
+
+		console.log("first");
+		ReactDOM.render(
+			<Ctrip><Elong></Elong><Qunar></Qunar></Ctrip>,
+			document.getElementById("container")
+		);
+		setTimeout(function () {
+			console.log("second");
+			ReactDOM.render(
+				<Ctrip><Elong></Elong><Ly></Ly><Qunar></Qunar></Ctrip>,
+				document.getElementById("container")
+			)
+		})
+	</script>
+</body>
+</html>
